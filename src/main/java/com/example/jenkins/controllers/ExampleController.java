@@ -3,10 +3,8 @@ package com.example.jenkins.controllers;
 import com.example.jenkins.models.Example;
 import com.example.jenkins.services.ExampleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +27,16 @@ public class ExampleController {
     @GetMapping("/{id}")
     public Example findById(@PathVariable int id){
         return exampleService.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable int id){
+        Example example = exampleService.findById(id);
+        if (example == null) {
+            return ResponseEntity.ok("Example not found");
+        }
+        exampleService.delete(example);
+        return ResponseEntity.ok("Succeed!");
     }
 
 }
