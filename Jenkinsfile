@@ -1,14 +1,14 @@
 pipeline {
     agent none
     stages {
-        stage("Build"){
+        stage('Build'){
             agent { docker 'maven:3-alpine' }
             steps {
                 echo 'Hello, maven'
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage("Run") {
+        stage('Run') {
             agent { docker 'openjdk' }
             steps {
                 echo 'Hello, JDK'
