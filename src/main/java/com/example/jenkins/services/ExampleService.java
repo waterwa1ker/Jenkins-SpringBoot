@@ -1,0 +1,28 @@
+package com.example.jenkins.services;
+
+import com.example.jenkins.models.Example;
+import com.example.jenkins.repositories.ExampleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ExampleService {
+
+    private final ExampleRepository exampleRepository;
+
+    @Autowired
+    public ExampleService(ExampleRepository exampleRepository) {
+        this.exampleRepository = exampleRepository;
+    }
+
+
+    public List<Example> findAll() {
+        return exampleRepository.findAll();
+    }
+
+    public Example findById(int id) {
+        return exampleRepository.findById(id).orElse(null);
+    }
+}
