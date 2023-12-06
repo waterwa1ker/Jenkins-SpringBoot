@@ -5,7 +5,7 @@ pipeline {
             agent { docker 'maven' }
             steps {
                 echo 'Hello, maven'
-                sh 'mvn -e -B -DskipTests clean package'
+                sh 'mvn -e -B -u root -DskipTests clean package'
             }
         }
         stage('Run') {
