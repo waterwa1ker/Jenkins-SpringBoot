@@ -7,7 +7,10 @@ pipeline {
                            image 'maven:3-alpine'
                            args '-u root'
                        }
-                   }
+               }
+               steps {
+                    sh 'mvn -B -DskipTests clean package'
+               }
             }
             stage('Run') {
                 agent { docker 'openjdk' }
